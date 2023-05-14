@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mysql-container:
+    image: 'mysql:5.7'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=travel-db
+    ports:
+      - "3307:3306"
+  springboot-travel-container:
+    image: springboot-travel-container
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/travel-db?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+    build:
+      context: "./"
+      dockerfile: "DockerFile"
+    depends_on:
+      - mysql-container
+
+
