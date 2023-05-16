@@ -11,7 +11,7 @@ services:
   springboot-travel-container:
     image: springboot-travel-container
     ports:
-      - "8082:8082"
+      - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/travel-db?autoReconnect=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: "root"
