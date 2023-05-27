@@ -6,21 +6,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
+@Table(name = "card")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Card implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
-    @Column
+    @Column(name = "title")
     private String title;
-
-    @Column
+    @Column(name = "description")
     private String description;
-    @Column
-    private String image;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private ImageModel imageModel;
 
 }
